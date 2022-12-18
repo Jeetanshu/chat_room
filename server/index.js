@@ -1,6 +1,7 @@
 const express = require("express");
 const soketio = require("socket.io");
 const http = require("http");
+const cors = require("cors");
 
 const { addUser, removeUser, getUser, getUsersInRoom } = require("./user.js");
 
@@ -11,6 +12,8 @@ const router = require("./router");
 const app = express();
 const server = http.createServer(app);
 const io = soketio(server);
+
+app.use(cors());
 
 app.get("/", (request, response) => {
   response.send("Chat App Server Working");
@@ -70,4 +73,4 @@ io.on("connection", (socket) => {
 
 app.use(router);
 
-server.listen(PORT, () => console.log(`Server has started on port ${PORT}`));
+server.listen(PORT, () => console.log(`Server has started on port 5000`));
